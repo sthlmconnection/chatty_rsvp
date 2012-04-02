@@ -13,22 +13,26 @@
     $form,
     nameKnown = false;
   
+  // Collect all values of the form into a hash.
   var getFormValues = function($form) {
     $.each($form.serializeArray(), function(i, field) {
       values[field.name] = field.value;
     });
   }
 
+  // Get the first name.
   var firstName = function(name) {
     return name.split(" ")[0];
   }
 
+  // Form submit handler.
   var submitForm = function() {
     getFormValues($form);
     changeState();
     return false;
   }
 
+  // Set/unset the loading state.
   var loading = function(status) {
     if (status) {
       $form.addClass("loading")
@@ -40,7 +44,7 @@
     }
   }
 
-  // Show next step.
+  // Show the next step.
   var showNext = function(callback) {
     var intervalTimer;
     step++;
@@ -57,7 +61,9 @@
         }
         else { // All items processed.
           clearInterval(intervalTimer);
-          callback();
+          if (callback) {
+            callback();
+          }
         }
       }, 500);
     }
@@ -66,14 +72,17 @@
   // Check state and increment step.
   var changeState = function() {
     switch (step) {
+      // Empty initial state.
       case 0:
         showNext(function() {
           $("#submit").val(texts.proceed).fadeIn(100);
         });
         break;
 
+      // User enters email.
       case 1:
         if (values.email) {
+          // Look for an existing email record.
           loading(true);
           $.getJSON("guest.php?email=" + values.email, function(data) {
             if (data && data.email) {
@@ -96,6 +105,8 @@
           });
         }
         break;
+
+      // User enters name.
       case 2:
         if (values.email && values.name) {
           loading(true);
@@ -111,6 +122,8 @@
           alert(texts.input_error);
         }
         break;
+
+      // User enters RSVP.
       case 3:
         if (values.email && values.name) {
           loading(true);
@@ -119,7 +132,6 @@
               $("#step-4 .message").text(texts.step_4.message_coming_no);
               $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_no);
               $("#step-4 .input").addClass("hidden");
-              $form.submit(); // No need to fill out step 4.
               break;
             case "0.5":
               $("#step-4 .message").text(texts.step_4.message_coming_maybe);
@@ -133,12 +145,17 @@
           $("submit", $form).val(texts.submit);
           showNext(function() {
             loading(false);
+            if (values.coming == 0) {
+              $form.submit(); // No need to fill out step 4.
+            }
           });
         }
         else {
           alert(texts.input_error);
         }
         break;
+
+      // User enters whether (s)he is bringing a friend.
       case 4:
         loading(true);
         $.post("guest.php", values, function(data) {
@@ -156,6 +173,7 @@
     }
   }
 
+  // Setup form behavior.
   $(document).ready(function() {
     $form = $("#rsvp");
     $form.submit(submitForm);
