@@ -25,7 +25,7 @@ $css_file = file_exists('style.css') ? 'style.css' : 'default.style.css';
           <p class="message"><?php print $texts->step_1; ?></p>
           <div class="input">
             <input type="email" name="email" id="email" value="" />
-          </input>
+          </div>
         </div>
         <div id="step-2" class="step">
           <p class="message"><?php print $texts->step_2->message_new; ?></p>
