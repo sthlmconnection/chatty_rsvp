@@ -1,0 +1,17 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;      
+}
+
+.js .step {
+  display: none;
+}
+.js input[type=submit] {
+  display: none;
+}
+
+.message {
+  margin-right: 200px;
+}
+.input {
+  margin-left: 200px;
+}

@@ -1,0 +1,35 @@
+{
+  "title": "RSVP page",
+  "intro": "Welcome to RSVP to our party!",
+  "proceed": "Proceed",
+  "submit": "Submit",
+  "input_error": "Please submit both your email address and your name.",
+  "submit_error": "Something went wrong. Please check the info and try again!",
+  "step_1": "Let's begin with your email. What is your email address?",
+  "step_2": {
+    "message_new": "What's your name?",
+    "message_existing": "Hi %name!"
+  },
+  "step_3": {
+    "message_new": "Hi %name! So, are you coming to the party?",
+    "message_existing": "So, are you coming to the party?",
+    "option_yes": "Yes!",
+    "option_no": "Unfortunately no",
+    "option_maybe": "Maybe…"
+  },
+  "step_4": {
+    "message_default": "One last question: Are you bringing a friend?",
+    "message_coming_no": "Oh, that's too bad!",
+    "message_coming_maybe": "Well, let's hope so! One last question: If you do come, will you bring a friend?",
+    "message_coming_yes": "Excellent! One last question: Are you bringing a friend?",
+    "option_yes": "Yes",
+    "option_no": "No"
+  },
+  "step_5": {
+    "message_default": "Thanks for your RSVP.",
+    "message_coming_no": "Thanks for your RSVP. Too bad you couldn't come!",
+    "message_coming_maybe": "Thanks for your RSVP. Hope you make it!",
+    "message_coming_yes": "Thanks for your RSVP. Welcome to the party!"
+  },
+  "bye": "If you want to change any of the information, please revisit this page and fill in the updated info."
+}
