@@ -40,39 +40,58 @@
     }
   }
 
+  // Show next step.
+  var showNext = function(callback) {
+    var intervalTimer;
+    step++;
+    var $items = $("#step-" + step).find(".message, .input").not(".hidden");
+    var i = 0;
+
+    // Process each item at a time interval.
+    if ($items.length > 0) {
+      intervalTimer = setInterval(function() {
+        var $item = $items.eq(i);
+        if ($item.length > 0) {
+          i++;
+          $item.slideDown();
+        }
+        else { // All items processed.
+          clearInterval(intervalTimer);
+          callback();
+        }
+      }, 500);
+    }
+  }
+
   // Check state and increment step.
   var changeState = function() {
     switch (step) {
       case 0:
-        $("#step-1 .message").delay(1000).slideDown(200, function() {
-          $("#step-1 .input").delay(1000).slideDown(200, function() {
-            $("#submit").val(texts.proceed).fadeIn(100);
-          });
+        showNext(function() {
+          $("#submit").val(texts.proceed).fadeIn(100);
         });
-        step = 1;
         break;
 
       case 1:
         if (values.email) {
           loading(true);
           $.getJSON("guest.php?email=" + values.email, function(data) {
-            step = 2;
             if (data && data.email) {
               $form.find("#email").attr("disabled", "disabled");
               if (data.name) {
                 nameKnown = true;
-                $("#name").val(data.name).hide();
+                $("#step-2 .input").addClass("hidden")
+                  .find("input").val(data.name);
                 $("#step-2 .message")
                   .text(texts.step_2.message_existing
                     .replace(/%name/, firstName(data.name)));
-                $form.submit(); // No need to fill out step 2.
               }
             }
-            $("#step-2 .message").slideDown(200, function() {
-              if (!nameKnown) {
-                $("#step-2 .input").delay(500).slideDown(200);
-              }
+            showNext(function() {
               loading(false);
+              if (nameKnown) {
+                $form.submit(); // No need to fill out step 2.
+              }
             });
           });
         }
@@ -80,15 +99,12 @@
       case 2:
         if (values.email && values.name) {
           loading(true);
-          step = 3;
           if (!nameKnown) {
             $("#step-3 .message").text(texts.step_3.message_new
               .replace(/%name/, firstName(values.name)));
           }
-          $("#step-3 .message").delay(nameKnown ? 1000 : 500).slideDown(200, function() {
-            $("#step-3 .input").delay(500).slideDown(200, function() {
-              loading(false);
-            });
+          showNext(function() {
+            loading(false);
           });
         }
         else {
@@ -98,12 +114,11 @@
       case 3:
         if (values.email && values.name) {
           loading(true);
-          step = 4;
           switch (values.coming) {
             case "0":
               $("#step-4 .message").text(texts.step_4.message_coming_no);
               $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_no);
-              $("#step-4 .input").attr("data-hide", "true");
+              $("#step-4 .input").addClass("hidden");
               $form.submit(); // No need to fill out step 4.
               break;
             case "0.5":
@@ -116,8 +131,7 @@
               break;
           }
           $("submit", $form).val(texts.submit);
-          $("#step-4 .message").delay(500).slideDown(200, function() {
-            $("#step-4 .input:not([data-hide=true])").delay(500).slideDown(200);
+          showNext(function() {
             loading(false);
           });
         }
@@ -132,12 +146,9 @@
             alert(texts.submit_error);
           }
           else {
-            step = 5;
             $("#submit", $form).fadeOut(100, function() {
               loading(false);
-              $("#step-5 .message:eq(0)").slideDown(200, function() {
-                $("#step-5 .message:eq(1)").delay(500).slideDown(200);
-              });
+              showNext();
             });
           }
         });
