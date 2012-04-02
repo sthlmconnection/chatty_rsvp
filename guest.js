@@ -1,8 +1,6 @@
 /**
  * guest.js
  * Provide interactive steps for the RSVS form.
- *
- * @todo: Disable submitted fields.
  */
 (function($) {
 
@@ -45,6 +43,8 @@
   // Show the next step.
   var showNext = function(callback) {
     var intervalTimer;
+    $("#step-" + step).find("input").attr("disabled", "disabled");
+
     step++;
     var $items = $("#step-" + step).find(".message, .input").not(".hidden");
     var i = 0;
@@ -87,7 +87,6 @@
           loading(true);
           $.getJSON("guest.php?email=" + values.email, function(data) {
             if (data && data.email) {
-              $form.find("#email").attr("disabled", "disabled");
               if (data.name) {
                 nameKnown = true;
                 $("#step-2 .input").addClass("hidden")
