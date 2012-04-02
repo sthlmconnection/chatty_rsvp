@@ -3,7 +3,6 @@
  * Provide interactive steps for the RSVS form.
  *
  * @todo: Scroll to bottom when adding messages.
- * @todo: Focus on current input field.
  * @todo: Disable submitted fields.
  */
 (function($) {
@@ -61,6 +60,7 @@
         }
         else { // All items processed.
           clearInterval(intervalTimer);
+          $items.find("input").eq(0).focus();
           if (callback) {
             callback();
           }
