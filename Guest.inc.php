@@ -59,8 +59,9 @@ class Guest {
         $this->name = $values[1]->getText();
         $this->coming = $values[2]->getText();
         $this->friend = $values[3]->getText();
-        return $this;
+        return $this->email ? $this : false;
       }
+      return false;
     }
     catch (Exception $e) {
       $messages[] = 'ERROR: ' . $e->getMessage();

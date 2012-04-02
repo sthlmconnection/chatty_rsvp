@@ -22,7 +22,7 @@ elseif (!empty($_POST['email'])) {
       && !empty($input['name'])) {
     $guest = new Guest();
     $guest->load($_POST['email']);
-    if ($guest) {
+    if ($guest->load($_POST['email'])) {
       $ret = "existing";
       foreach ($input as $key => $val) {
         $guest->{$key} = $val;
