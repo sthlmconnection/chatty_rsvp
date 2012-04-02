@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Guest
+ * Class handling RSVP records for individual guests.
+ */
 class Guest {
 
   static $config;

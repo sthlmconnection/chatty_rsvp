@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * guest.php
+ * JSON service for reading/writing REST records.
+ */
+
 require 'Guest.inc.php';
 require 'settings.php';
 

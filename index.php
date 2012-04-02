@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * index.php
+ * The base page.
+ */
+
 $texts_file = file_exists('texts.json') ? 'texts.json' : 'default.texts.json';
 $texts_json = trim(file_get_contents($texts_file));
 $texts = json_decode($texts_json);
