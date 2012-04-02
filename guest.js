@@ -2,7 +2,6 @@
  * guest.js
  * Provide interactive steps for the RSVS form.
  *
- * @todo: Scroll to bottom when adding messages.
  * @todo: Disable submitted fields.
  */
 (function($) {
@@ -56,7 +55,9 @@
         var $item = $items.eq(i);
         if ($item.length > 0) {
           i++;
-          $item.slideDown();
+          $item.slideDown(200, function() {
+            $("html, body").animate({scrollTop: $item.offset().top}, 200);
+          });
         }
         else { // All items processed.
           clearInterval(intervalTimer);
