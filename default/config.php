@@ -1,7 +1,7 @@
 <?php
 
 /**
- * default.settings.php
+ * settings.php
  * Copy this file and name the copy 'settings.php'.
  */
 
