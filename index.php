@@ -24,7 +24,9 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
   </head>
   <body>
     <div class="page">
-      <?php print $texts->intro; ?>
+      <div class="intro">
+        <?php print $texts->intro; ?>
+      </div>
       <form id="rsvp" action="guest.php" method="post">
         <div id="step-1" class="step">
           <p class="message"><?php print $texts->step_1; ?></p>
