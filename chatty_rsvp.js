@@ -21,6 +21,11 @@
     return name.split(" ")[0];
   }
 
+  // Validate an email address.
+  var validateEmail = function(email) {
+    return email && /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email);
+  }
+
   // Form submit handler.
   var submitForm = function() {
     getFormValues($form);
@@ -82,7 +87,7 @@
 
       // User enters email.
       case 1:
-        if (values.email) {
+        if (validateEmail(values.email)) {
           // Look for an existing email record.
           loading(true);
           $.getJSON("guest.php?email=" + values.email, function(data) {
@@ -105,11 +110,14 @@
             });
           });
         }
+        else {
+          alert(texts.input_error);
+        }
         break;
 
       // User enters name.
       case 2:
-        if (values.email && values.name) {
+        if (validateEmail(values.email) && values.name) {
           loading(true);
           if (!nameKnown) {
             $("#step-3 .message").text(texts.step_3.message_new
@@ -126,7 +134,7 @@
 
       // User enters RSVP.
       case 3:
-        if (values.email && values.name) {
+        if (validateEmail(values.email) && values.name) {
           loading(true);
           switch (values.coming) {
             case "0":
@@ -158,19 +166,24 @@
 
       // User enters whether (s)he is bringing a friend.
       case 4:
-        loading(true);
-        $.post("guest.php", values, function(data) {
-          if (/failed/.test(data) || /error/.test(data)) {
-            loading(false);
-            alert(texts.submit_error);
-          }
-          else {
-            $("#submit", $form).fadeOut(100, function() {
+        if (validateEmail(values.email) && values.name) {
+          loading(true);
+          $.post("guest.php", values, function(data) {
+            if (/failed/.test(data) || /error/.test(data)) {
               loading(false);
-              showNext();
-            });
-          }
-        });
+              alert(texts.submit_error);
+            }
+            else {
+              $("#submit", $form).fadeOut(100, function() {
+                loading(false);
+                showNext();
+              });
+            }
+          });
+        }
+        else {
+          alert(texts.input_error);
+        }
         break;
     }
   }

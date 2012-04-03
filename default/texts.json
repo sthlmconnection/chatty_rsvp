@@ -3,7 +3,7 @@
   "intro": "Welcome to our party RSVP page!",
   "proceed": "Proceed",
   "submit": "Submit",
-  "input_error": "Please submit both your email address and your name.",
+  "input_error": "Please check your input.",
   "submit_error": "Something went wrong. Please check the info and try again!",
   "step_1": "Let's begin with your email. What is your email address?",
   "step_2": {
