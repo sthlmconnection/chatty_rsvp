@@ -6,7 +6,7 @@
  */
 
 require 'Guest.inc.php';
-require 'settings.php';
+require 'custom/config.php';
 
 Guest::config($conf);
 

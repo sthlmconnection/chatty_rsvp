@@ -5,10 +5,10 @@
  * The base page.
  */
 
-$texts_file = file_exists('texts.json') ? 'texts.json' : 'default.texts.json';
+$texts_file = file_exists('custom/texts.json') ? 'custom/texts.json' : 'default/texts.json';
 $texts_json = trim(file_get_contents($texts_file));
 $texts = json_decode($texts_json);
-$css_file = file_exists('style.css') ? 'style.css' : 'default.style.css';
+$css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/style.css';
 
 ?>
 <!doctype html>
