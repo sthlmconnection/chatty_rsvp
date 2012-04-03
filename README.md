@@ -27,7 +27,7 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
 ## Getting started
 
 * Download the project files.
-* Download [Zend Framework](http://framework.zend.com/download/current/). The Minimal package is sufficient.
+* Download [Zend Framework](http://framework.zend.com/download/current/). The Minimal package is sufficient. Put the `Zend` directory directly under this directory.
 * Create a GoogleDocs spreadsheet with the following columns (important):
   * Email
   * Name
@@ -39,4 +39,4 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
 ## Customization
 
 * Make a copy of `default/style.css` and at `custom/style.css`. Go crazy.
-* Make a copy of `default/texts.json` in the `default` directory and add your personal language to it.
+* Make a copy of `default/texts.json` in the `custom` directory and add your personal language to it.
