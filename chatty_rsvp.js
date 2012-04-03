@@ -61,7 +61,7 @@
         if ($item.length > 0) {
           i++;
           $item.slideDown(200, function() {
-            $("html, body").animate({scrollTop: $item.offset().top}, 200);
+            $("html, body").animate({scrollTop: $item.offset().top}, 500);
           });
         }
         else { // All items processed.
@@ -71,7 +71,7 @@
             callback();
           }
         }
-      }, 500);
+      }, 800);
     }
   }
 
