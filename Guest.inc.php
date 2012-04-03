@@ -6,21 +6,20 @@
  */
 class Guest {
 
-  static $config;
-  static $g_service;
-
   public $email;
   public $name;
   public $coming;
   public $friend;
 
+  static $config;
+  static $g_service;
+
   private $messages = array();
-  private $spreadsheet_item; // Used for cache this guest's spreadsheet record.
+  private $spreadsheet_item; // Used to cache this guest's spreadsheet record.
 
-  function config($config) {
-    self::$config = $config;
-  }
-
+  /**
+   * Class constructor.
+   */
   function __construct($email = '', $name = '', $coming = 1, $friend = 0) {
     $this->email = $email;
     $this->name = $name;
@@ -28,8 +27,22 @@ class Guest {
     $this->friend = $friend;
   }
 
+  /**
+   * Configure the class.
+   *
+   * @param $config
+   *  - A configuration array, as defined in default.settings.php.
+   */
+  function config($config) {
+    self::$config = $config;
+  }
+
+  /**
+   * Connect to the spreadsheet.
+   */
   function connectSpreadsheet() {
-    if (empty($g_service)) {
+    // Connect if not already connected.
+    if (empty(self::$g_service)) {
       // load Zend Gdata libraries
       require_once 'Zend/Loader.php';
       Zend_Loader::loadClass('Zend_Gdata_Spreadsheets');
@@ -44,18 +57,26 @@ class Guest {
     } 
   }
 
+  /**
+   * Load a guest record and populate the guest object.
+   *
+   * @param $email
+   *  - The email address to look up the record by.
+   */
   function load($email) {
     try {
       self::connectSpreadsheet();
 
-      // define worksheet query
-      // get list feed for query
+      // Define a worksheet query.
       $query = new Zend_Gdata_Spreadsheets_ListQuery();
       $query->setSpreadsheetKey(self::$config['spreadsheet_id']);
       $query->setWorksheetId(self::$config['worksheet_id']);
       $query->setSpreadsheetQuery('email = "' . $email . '"');
+
+      // Get the list feed for the query.
       $listFeed = self::$g_service->getListFeed($query);
 
+      // Cache the spreadsheet entry and populate the object.
       if ($listFeed->entries[0]) {
         $this->spreadsheet_item = $listFeed->entries[0];
         $values = $this->spreadsheet_item->getCustom();
@@ -73,11 +94,14 @@ class Guest {
     } 
   }
 
+  /**
+   * Insert a guest record into the spreadsheet.
+   */
   function insert() {
     try {
       self::connectSpreadsheet();
 
-      // create row content
+      // Create the row content.
       $row = array(
         'email' => (string) $this->email, 
         'name' => (string) $this->name, 
@@ -85,7 +109,7 @@ class Guest {
         'friend' => (string) $this->friend,
       );
 
-      // insert new row
+      // Insert the row.
       $entryResult = self::$g_service->insertRow($row, self::$config['spreadsheet_id'], self::$config['worksheet_id']);
       return $entryResult->id;
       
@@ -96,6 +120,9 @@ class Guest {
     }
   }
 
+  /**
+   * Update a guest record in the spreadsheet.
+   */
   function update() {
     try {
       self::connectSpreadsheet();
@@ -103,7 +130,7 @@ class Guest {
         $this->load($this->email);
       }
 
-      // create row content
+      // Create the row content.
       $row = array(
         'email' => (string) $this->email, 
         'name' => (string) $this->name, 
@@ -111,6 +138,7 @@ class Guest {
         'friend' => (string) $this->friend,
       );
 
+      // Update the row.
       return self::$g_service->updateRow($this->spreadsheet_item, $row);
     }
     catch (Exception $e) {
