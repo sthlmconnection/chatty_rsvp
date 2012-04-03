@@ -151,9 +151,9 @@
               $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_yes);
               break;
           }
-          $("#submit", $form).val(texts.submit);
           showNext(function() {
             loading(false);
+            $("#submit", $form).val(texts.submit);
             if (values.coming == 0) {
               $form.submit(); // No need to fill out step 4.
             }
