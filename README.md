@@ -13,6 +13,10 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
 
 * Does not send emails.
 * Does not limit the guest list to invited guests (existing email addresses).
+* Is not very nice without JavaScript.
+* Is not properly browser tested.
+
+(Four features and four unfeatures makes perfect balance.)
 
 ## Requirements
 
