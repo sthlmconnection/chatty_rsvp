@@ -60,7 +60,7 @@
         var $item = $items.eq(i);
         if ($item.length > 0) {
           i++;
-          $item.slideDown(200, function() {
+          $item.slideDown(100, function() {
             $("html, body").animate({scrollTop: $item.offset().top}, 500);
           });
         }
@@ -71,7 +71,7 @@
             callback();
           }
         }
-      }, 800);
+      }, 1000);
     }
   }
 
@@ -81,7 +81,7 @@
       // Empty initial state.
       case 0:
         showNext(function() {
-          $("#submit").val(texts.proceed).fadeIn(100);
+          $("#submit").val(texts.proceed).slideDown(100);
         });
         break;
 
@@ -174,10 +174,9 @@
               alert(texts.submit_error);
             }
             else {
-              $("#submit", $form).fadeOut(100, function() {
-                loading(false);
-                showNext();
-              });
+              $("#submit", $form).slideUp(200);
+              loading(false);
+              showNext();
             }
           });
         }
