@@ -35,7 +35,7 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
   * Friend
   * Reference
 * Set up a new Gmail/Google Apps account with the least permissions possible while still being able to edit the spreadsheet.
-* Make a copy of `default/config.php` in the `custom` directory. Fill in the required options.
+* Make a copy of `default/config.php` in the `custom` directory. Fill in the required options. Keep it secret. Keep it safe.
 
 ## Customization
 
