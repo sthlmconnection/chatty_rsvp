@@ -161,6 +161,7 @@
         loading(true);
         $.post("guest.php", values, function(data) {
           if (/failed/.test(data) || /error/.test(data)) {
+            loading(false);
             alert(texts.submit_error);
           }
           else {
