@@ -38,7 +38,7 @@ elseif (!empty($_POST['email'])) {
     }
     else {
       $ret = "new";
-      $guest = new Guest($input['email'], $input['name'], $input['coming'], $input['friend']);
+      $guest = new Guest($input['email'], $input['name'], $input['coming'], $input['friend'], $input['reference']);
       $ret .= ' ' . $guest->insert() ? 'inserted' : 'failed';
     }
 
