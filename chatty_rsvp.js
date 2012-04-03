@@ -143,7 +143,7 @@
               $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_yes);
               break;
           }
-          $("submit", $form).val(texts.submit);
+          $("#submit", $form).val(texts.submit);
           showNext(function() {
             loading(false);
             if (values.coming == 0) {
