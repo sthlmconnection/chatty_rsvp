@@ -27,7 +27,7 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
       <div class="intro">
         <?php print $texts->intro; ?>
       </div>
-      <form id="rsvp" action="guest.php" method="post">
+      <form id="rsvp" action="guest.php" method="post" autocomplete="off">
         <div id="step-1" class="step">
           <p class="message"><?php print $texts->step_1; ?></p>
           <div class="input">
