@@ -20,7 +20,7 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>jQuery("html").addClass("js");</script>
     <script>var texts = <?php print $texts_json; ?>;</script>
-    <script src="guest.js"></script>
+    <script src="chatty_rsvp.js"></script>
   </head>
   <body>
     <div class="page">

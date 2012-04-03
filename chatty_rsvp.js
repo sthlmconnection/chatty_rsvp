@@ -1,5 +1,5 @@
 /**
- * guest.js
+ * chatty_rsvp.js
  * Provide interactive steps for the RSVS form.
  */
 (function($) {
