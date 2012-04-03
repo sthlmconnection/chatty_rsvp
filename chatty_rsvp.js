@@ -89,8 +89,9 @@
             if (data && data.email) {
               if (data.name) {
                 nameKnown = true;
+                $("#reference").val(data.reference);
                 $("#step-2 .input").addClass("hidden")
-                  .find("input").val(data.name);
+                  .find("#name").val(data.name);
                 $("#step-2 .message")
                   .text(texts.step_2.message_existing
                     .replace(/%name/, firstName(data.name)));

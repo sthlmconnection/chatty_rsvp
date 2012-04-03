@@ -53,6 +53,7 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
             <input type="radio" name="friend" value="0" checked="checked"> <?php print $texts->step_4->option_no; ?>
           </div>
         </div>
+        <input type="hidden" name="reference" id="reference" value="web" />
         <input type="submit" name="submit" id="submit" value="<?php print $texts->submit; ?>" />
         <div id="step-5" class="step">
           <p class="message"><?php print $texts->step_5->message_default; ?></p>
