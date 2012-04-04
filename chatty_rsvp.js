@@ -48,7 +48,7 @@
   // Show the next step.
   var showNext = function(callback) {
     var intervalTimer;
-    $("#step-" + step).find("input").attr("disabled", "disabled");
+    $("#step-" + step).find("input").blur().attr("disabled", "disabled");
 
     step++;
     var $items = $("#step-" + step).find(".message, .input").not(".hidden");
