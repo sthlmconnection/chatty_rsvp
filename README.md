@@ -14,9 +14,6 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
 * Does not send emails.
 * Does not limit the guest list to invited guests (existing email addresses).
 * Is not very nice without JavaScript.
-* Is not properly browser tested.
-
-(Four features and four unfeatures makes perfect balance.)
 
 ## Requirements
 
@@ -28,12 +25,13 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
 
 * Download the project files.
 * Download [Zend Framework](http://framework.zend.com/download/current/). The Minimal package is sufficient. Put the `Zend` directory directly under this directory.
-* Create a GoogleDocs spreadsheet with the following columns (important):
+* Create a GoogleDocs spreadsheet with the following columns, in this order (important):
   * Email
   * Name
   * Coming
   * Friend
   * Reference
+  * Message
 * Set up a new Gmail/Google Apps account with the least permissions possible while still being able to edit the spreadsheet.
 * Make a copy of `default/config.php` in the `custom` directory. Fill in the required options. Keep it secret. Keep it safe.
 
