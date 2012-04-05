@@ -92,14 +92,20 @@
           loading(true);
           $.getJSON("guest.php?email=" + values.email, function(data) {
             if (data && data.email) {
+              // Populate form values.
               if (data.name) {
                 nameKnown = true;
-                $("#reference").val(data.reference);
                 $("#step-2 .input").addClass("hidden")
                   .find("#name").val(data.name);
                 $("#step-2 .message")
                   .text(texts.step_2.message_existing
                     .replace(/%name/, firstName(data.name)));
+              }
+              $.each(["coming", "friend"], function() {
+                $form.find("input[name=" + this + "][value=" + data[this] + "]").click();
+              });
+              if (data.reference) {
+                $("#reference").val(data.reference);
               }
             }
             showNext(function() {
