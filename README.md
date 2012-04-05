@@ -33,9 +33,10 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
   * Reference
   * Message
 * Set up a new Gmail/Google Apps account with the least permissions possible while still being able to edit the spreadsheet.
+* Create a subdirectory called `custom`.
 * Make a copy of `default/config.php` in the `custom` directory. Fill in the required options. Keep it secret. Keep it safe.
 
 ## Customization
 
-* Make a copy of `default/style.css` and at `custom/style.css`. Go crazy.
+* Make a copy of `default/style.css` at `custom/style.css`. Go crazy.
 * Make a copy of `default/texts.json` in the `custom` directory and add your personal language to it.
