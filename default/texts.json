@@ -3,6 +3,7 @@
   "intro": "Welcome to our party RSVP page!",
   "proceed": "Proceed",
   "submit": "Submit",
+  "no": "No",
   "input_error": "Please check your input.",
   "submit_error": "Something went wrong. Please check the info and try again!",
   "step_1": "Let's begin with your email. What is your email address?",
@@ -26,6 +27,9 @@
     "option_no": "No"
   },
   "step_5": {
+    "message": "Is there anything else you would like us to know?"
+  },
+  "step_6": {
     "message_default": "Thanks for your RSVP.",
     "message_coming_no": "Thanks for your RSVP. Too bad you couldn't come!",
     "message_coming_maybe": "Thanks for your RSVP. Hope you make it!",

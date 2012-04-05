@@ -54,7 +54,7 @@
     var $items = $("#step-" + step).find(".message, .input").not(".hidden");
     var i = 0;
 
-    // Process each item at a time interval.
+    // Display each item within a step at a time interval.
     if ($items.length > 0) {
       intervalTimer = setInterval(function() {
         var $item = $items.eq(i);
@@ -107,6 +107,7 @@
               if (data.reference) {
                 $("#reference").val(data.reference);
               }
+              $("#message").val(data.message);
             }
             showNext(function() {
               loading(false);
@@ -145,21 +146,20 @@
           switch (values.coming) {
             case "0":
               $("#step-4 .message").text(texts.step_4.message_coming_no);
-              $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_no);
+              $("#step-6 .message:eq(0)").text(texts.step_5.message_coming_no);
               $("#step-4 .input").addClass("hidden");
               break;
             case "0.5":
               $("#step-4 .message").text(texts.step_4.message_coming_maybe);
-              $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_maybe);
+              $("#step-6 .message:eq(0)").text(texts.step_5.message_coming_maybe);
               break;
             case "1":
               $("#step-4 .message").text(texts.step_4.message_coming_yes);
-              $("#step-5 .message:eq(0)").text(texts.step_5.message_coming_yes);
+              $("#step-6 .message:eq(0)").text(texts.step_5.message_coming_yes);
               break;
           }
           showNext(function() {
             loading(false);
-            $("#submit", $form).val(texts.submit);
             if (values.coming == 0) {
               $form.submit(); // No need to fill out step 4.
             }
@@ -172,8 +172,21 @@
 
       // User enters whether (s)he is bringing a friend.
       case 4:
+        loading(true);
+        showNext(function() {
+          loading(false);
+          // Last step, change button text to "Submit".
+          $("#submit", $form).val(texts.submit);
+        });
+        break;
+
+      // User enters a custom message.
+      case 5:
         if (validateEmail(values.email) && values.name) {
           loading(true);
+          if (!values.message) {
+            $("#step-5 .input input").attr("placeholder", texts.no);
+          }
           $.post("guest.php", values, function(data) {
             if (/failed/.test(data) || /error/.test(data)) {
               loading(false);

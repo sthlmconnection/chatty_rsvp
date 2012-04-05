@@ -10,6 +10,8 @@ class Guest {
   public $name;
   public $coming;
   public $friend;
+  public $reference;
+  public $message;
 
   static $config;
   static $g_service;
@@ -20,12 +22,13 @@ class Guest {
   /**
    * Class constructor.
    */
-  function __construct($email = '', $name = '', $coming = 1, $friend = 0, $reference = '') {
+  function __construct($email = '', $name = '', $coming = 1, $friend = 0, $reference = '', $message = '') {
     $this->email = $email;
     $this->name = $name;
     $this->coming = $coming;
     $this->friend = $friend;
     $this->reference = $reference;
+    $this->message = $message;
   }
 
   /**
@@ -86,6 +89,7 @@ class Guest {
         $this->coming = $values[2]->getText();
         $this->friend = $values[3]->getText();
         $this->reference = $values[4]->getText();
+        $this->message = $values[5]->getText();
         return $this->email ? $this : false;
       }
       return false;
@@ -110,6 +114,7 @@ class Guest {
         'coming' => (string) $this->coming,
         'friend' => (string) $this->friend,
         'reference' => (string) $this->reference,
+        'message' => (string) $this->message,
       );
 
       // Insert the row.
@@ -140,6 +145,7 @@ class Guest {
         'coming' => (string) $this->coming,
         'friend' => (string) $this->friend,
         'reference' => (string) $this->reference,
+        'message' => (string) $this->message,
       );
 
       // Update the row.
