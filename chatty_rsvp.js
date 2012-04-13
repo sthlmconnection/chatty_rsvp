@@ -187,16 +187,25 @@
           if (!values.message) {
             $("#step-5 .input input").attr("placeholder", texts.no);
           }
-          $.post("guest.php", values, function(data) {
-            if (/failed/.test(data) || /error/.test(data)) {
+          jQuery.ajax({
+            type: "post",
+            url: "guest.php",
+            data: values,
+            success: function(data) {
+              if (/failed/.test(data) || /error/.test(data)) {
+                loading(false);
+                alert(texts.submit_error);
+              }
+              else {
+                $("#submit", $form).slideUp(200);
+                loading(false);
+                showNext();
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
               loading(false);
               alert(texts.submit_error);
-            }
-            else {
-              $("#submit", $form).slideUp(200);
-              loading(false);
-              showNext();
-            }
+            }    
           });
         }
         else {
