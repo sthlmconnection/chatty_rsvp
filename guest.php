@@ -29,8 +29,7 @@ elseif (!empty($_POST['email'])) {
   if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/", $input['email'])
       && !empty($input['name'])) {
     $guest = new Guest();
-    $guest->load($_POST['email']);
-    if ($guest) {
+    if ($guest->load($input['email'])) {
       $ret = "existing";
       foreach ($input as $key => $val) {
         $guest->{$key} = $val;
@@ -39,7 +38,12 @@ elseif (!empty($_POST['email'])) {
     }
     else {
       $ret = "new";
-      $guest = new Guest($input['email'], $input['name'], $input['coming'], $input['friend'], $input['reference'], $input['message']);
+      $guest->email = $input['email'];
+      $guest->name = $input['name'];
+      $guest->coming = $input['coming'];
+      $guest->friend = $input['friend'];
+      $guest->reference = $input['reference'];
+      $guest->message = $input['message'];
       $ret .= ' ' . $guest->insert() ? 'inserted' : 'failed';
     }
 
