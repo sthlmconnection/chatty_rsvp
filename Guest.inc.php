@@ -7,10 +7,10 @@
 class Guest {
 
   public $email;
-  public $name;
+  public $firstname;
+  public $lastname;
   public $coming;
   public $friend;
-  public $reference;
   public $message;
 
   static $config;
@@ -22,12 +22,12 @@ class Guest {
   /**
    * Class constructor.
    */
-  function __construct($email = '', $name = '', $coming = 1, $friend = 0, $reference = '', $message = '') {
+  function __construct($email = '', $firstname = '', $lastname = '', $coming = 1, $friend = 0, $message = '') {
     $this->email = $email;
-    $this->name = $name;
+    $this->firstname = $firstname;
+    $this->lastname = $lastname;
     $this->coming = $coming;
     $this->friend = $friend;
-    $this->reference = $reference;
     $this->message = $message;
   }
 
@@ -85,10 +85,10 @@ class Guest {
         $this->spreadsheet_item = $listFeed->entries[0];
         $values = $this->spreadsheet_item->getCustom();
         $this->email = $values[0]->getText();
-        $this->name = $values[1]->getText();
-        $this->coming = $values[2]->getText();
-        $this->friend = $values[3]->getText();
-        $this->reference = $values[4]->getText();
+        $this->firstname = $values[1]->getText();
+        $this->lastname = $values[2]->getText();
+        $this->coming = $values[3]->getText();
+        $this->friend = $values[4]->getText();
         $this->message = $values[5]->getText();
         return $this->email ? $this : false;
       }
@@ -110,10 +110,10 @@ class Guest {
       // Create the row content.
       $row = array(
         'email' => (string) $this->email, 
-        'name' => (string) $this->name, 
+        'firstname' => (string) $this->firstname, 
+        'lastname' => (string) $this->lastname, 
         'coming' => (string) $this->coming,
         'friend' => (string) $this->friend,
-        'reference' => (string) $this->reference,
         'message' => (string) $this->message,
       );
 
@@ -141,10 +141,10 @@ class Guest {
       // Create the row content.
       $row = array(
         'email' => (string) $this->email, 
-        'name' => (string) $this->name, 
+        'firstname' => (string) $this->firstname, 
+        'lastname' => (string) $this->lastname, 
         'coming' => (string) $this->coming,
         'friend' => (string) $this->friend,
-        'reference' => (string) $this->reference,
         'message' => (string) $this->message,
       );
 

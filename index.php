@@ -19,6 +19,8 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
     <style>@import url(<?php print $css_file; ?>);</style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>jQuery("html").addClass("js");</script>
+<script type="text/javascript" src="http://use.typekit.com/ond6kzk.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <script>var texts = <?php print $texts_json; ?>;</script>
     <script src="chatty_rsvp.js"></script>
   </head>
@@ -37,7 +39,9 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
         <div id="step-2" class="step">
           <p class="message"><?php print $texts->step_2->message_new; ?></p>
           <div class="input">
-            <input type="text" name="name" id="name" value="" />
+            <input type="text" name="nameinput" id="nameinput" value="" />
+            <input type="hidden" name="firstname" id="firstname" value="" />
+            <input type="hidden" name="lastname" id="lastname" value="" />
           </div>
         </div>
         <div id="step-3" class="step">
@@ -61,7 +65,6 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
             <input type="text" name="message" id="message" value="">
           </div>
         </div>
-        <input type="hidden" name="reference" id="reference" value="web" />
         <input type="submit" name="submit" id="submit" value="<?php print $texts->submit; ?>" />
         <div id="step-6" class="step">
           <p class="message"><?php print $texts->step_6->message_default; ?></p>

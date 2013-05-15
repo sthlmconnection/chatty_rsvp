@@ -2,7 +2,7 @@
 
 /**
  * guest.php
- * JSON service for reading/writing REST records.
+ * RESTful service for reading/writing guest records.
  */
 
 require 'Guest.inc.php';
@@ -19,15 +19,15 @@ if (!empty($_GET['email'])) {
 }
 elseif (!empty($_POST['email'])) {
   $input = array();
-  $input['name'] = trim($_POST['name']);
+  $input['firstname'] = trim($_POST['firstname']);
+  $input['lastname'] = trim($_POST['lastname']);
   $input['email'] = trim($_POST['email']);
   $input['coming'] = (float) trim($_POST['coming']);
   $input['friend'] = (int) trim($_POST['friend']);
-  $input['reference'] = trim($_POST['reference']);
   $input['message'] = trim($_POST['message']);
 
   if (preg_match("/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/", $input['email'])
-      && !empty($input['name'])) {
+      && !empty($input['firstname'])) {
     $guest = new Guest();
     if ($guest->load($input['email'])) {
       $ret = "existing";
@@ -39,10 +39,10 @@ elseif (!empty($_POST['email'])) {
     else {
       $ret = "new";
       $guest->email = $input['email'];
-      $guest->name = $input['name'];
+      $guest->firstname = $input['firstname'];
+      $guest->lastname = $input['lastname'];
       $guest->coming = $input['coming'];
       $guest->friend = $input['friend'];
-      $guest->reference = $input['reference'];
       $guest->message = $input['message'];
       $ret .= ' ' . $guest->insert() ? 'inserted' : 'failed';
     }

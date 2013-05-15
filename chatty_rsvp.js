@@ -16,11 +16,6 @@
     });
   }
 
-  // Get the first name.
-  var firstName = function(name) {
-    return name.split(" ")[0];
-  }
-
   // Validate an email address.
   var validateEmail = function(email) {
     return email && /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email);
@@ -93,20 +88,19 @@
           $.getJSON("guest.php?email=" + values.email, function(data) {
             if (data && data.email) {
               // Populate form values.
-              if (data.name) {
+              if (data.firstname) {
                 nameKnown = true;
-                $("#step-2 .input").addClass("hidden")
-                  .find("#name").val(data.name);
+                $("#step-2 .input").addClass("hidden");
+                $("#firstname").val(data.firstname);
+                $("#lastname").val(data.lastname);
+                $("#nameinput").val(data.lastname + ' ' + data.lastname);
                 $("#step-2 .message")
                   .text(texts.step_2.message_existing
-                    .replace(/%name/, firstName(data.name)));
+                    .replace(/%name/, data.firstname));
               }
               $.each(["coming", "friend"], function() {
                 $form.find("input[name=" + this + "][value=" + data[this] + "]").click();
               });
-              if (data.reference) {
-                $("#reference").val(data.reference);
-              }
               $("#message").val(data.message);
             }
             showNext(function() {
@@ -124,11 +118,20 @@
 
       // User enters name.
       case 2:
-        if (validateEmail(values.email) && values.name) {
+        if (validateEmail(values.email) && (values.firstname || values.nameinput)) {
+          if (values.nameinput) {
+            (function() {
+              var parts = values.nameinput.split(' ');
+              values.firstname = parts.shift();
+              values.lastname = parts.join(' ');
+            })();
+            $form.find('#firstname').val(values.firstname);
+            $form.find('#lastname').val(values.lastname);
+          }
           loading(true);
           if (!nameKnown) {
             $("#step-3 .message").text(texts.step_3.message_new
-              .replace(/%name/, firstName(values.name)));
+              .replace(/%name/, values.firstname));
           }
           showNext(function() {
             loading(false);
@@ -141,7 +144,7 @@
 
       // User enters RSVP.
       case 3:
-        if (validateEmail(values.email) && values.name) {
+        if (validateEmail(values.email) && values.firstname) {
           loading(true);
           switch (values.coming) {
             case "0":
@@ -182,7 +185,7 @@
 
       // User enters a custom message.
       case 5:
-        if (validateEmail(values.email) && values.name) {
+        if (validateEmail(values.email) && values.firstname) {
           loading(true);
           if (!values.message) {
             $("#step-5 .input input").attr("placeholder", texts.no);

@@ -27,10 +27,10 @@ This is a small PHP and JavaScript application that provides a nifty little RSVP
 * Download [Zend Framework](http://framework.zend.com/download/current/). The Minimal package is sufficient. Put the `Zend` directory directly under this directory.
 * Create a GoogleDocs spreadsheet with the following columns, in this order (important):
   * Email
-  * Name
+  * FirstName
+  * LastName
   * Coming
   * Friend
-  * Reference
   * Message
 * Set up a new Gmail/Google Apps account with the least permissions possible while still being able to edit the spreadsheet.
 * Create a subdirectory called `custom`.
