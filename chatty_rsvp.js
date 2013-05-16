@@ -93,7 +93,7 @@
                 $("#step-2 .input").addClass("hidden");
                 $("#firstname").val(data.firstname);
                 $("#lastname").val(data.lastname);
-                $("#nameinput").val(data.lastname + ' ' + data.lastname);
+                $("#nameinput").val(data.firstname + ' ' + data.lastname);
                 $("#step-2 .message")
                   .text(texts.step_2.message_existing
                     .replace(/%name/, data.firstname));
@@ -121,7 +121,7 @@
         if (validateEmail(values.email) && (values.firstname || values.nameinput)) {
           if (values.nameinput) {
             (function() {
-              var parts = values.nameinput.split(' ');
+              var parts = values.nameinput.trim().split(' ');
               values.firstname = parts.shift();
               values.lastname = parts.join(' ');
             })();
