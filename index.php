@@ -47,16 +47,16 @@ $css_file = file_exists('custom/style.css') ? 'custom/style.css' : 'default/styl
         <div id="step-3" class="step">
           <p class="message"><?php print $texts->step_3->message_existing; ?></p>
           <div class="input">
-            <input type="radio" name="coming" value="1" checked="checked"> <?php print $texts->step_3->option_yes; ?>
-            <input type="radio" name="coming" value="0"> <?php print $texts->step_3->option_no; ?>
-            <input type="radio" name="coming" value="0.5"> <?php print $texts->step_3->option_maybe; ?>
+            <label for="radio-1"><input id="radio-1" type="radio" name="coming" value="1" checked="checked"> <?php print $texts->step_3->option_yes; ?></label>
+            <label for="radio-2"><input id="radio-2" type="radio" name="coming" value="0"> <?php print $texts->step_3->option_no; ?></label>
+            <label for="radio-3"><input id="radio-3" type="radio" name="coming" value="0.5"> <?php print $texts->step_3->option_maybe; ?></label>
           </div>
         </div>
         <div id="step-4" class="step">
           <p class="message"><?php print $texts->step_4->message_default; ?></p>
           <div class="input">
-            <input type="radio" name="friend" value="1"> <?php print $texts->step_4->option_yes; ?>
-            <input type="radio" name="friend" value="0" checked="checked"> <?php print $texts->step_4->option_no; ?>
+            <label for="radio-2-1"><input id="radio-2-1" type="radio" name="friend" value="1"> <?php print $texts->step_4->option_yes; ?></label>
+            <label for="radio-2-2"><input id="radio-2-2" type="radio" name="friend" value="0" checked="checked"> <?php print $texts->step_4->option_no; ?></label>
           </div>
         </div>
         <div id="step-5" class="step">
