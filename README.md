@@ -1,14 +1,15 @@
 # Chatty RSVP page
 
-This is a small PHP and JavaScript application that provides a nifty little RSV
-page with a chat-style interface. The idea is to make the guests feel welcome
-and give a personal touch to an otherwise rather boring process.
+This is a small PHP and JavaScript application that provides event organizers
+with a nifty little RSVP page with a chat-style interface. The idea is to make
+the guests feel welcome and give a personal touch to an otherwise rather boring
+process.
 
 ## Features
 
 * GoogleDocs integration – saves RSVPs to a spreadsheet.
 * Can deal with and update existing guest records as well as adding new guests.
-* Friendly, interactive, chat-like interface.
+* Has a friendly, interactive, chat-like interface.
 * Intelligently asks the right questions and talks to the user based on existing
 information.
 
@@ -16,34 +17,39 @@ information.
 
 * Does not send emails.
 * Does not limit the guest list to invited guests (existing email addresses).
-* Is not very nice without JavaScript.
 
 ## Requirements
 
 * PHP (probably 5.2 minimum).
-* A Gmail/Google Apps account.
-* [Zend Framework](http://framework.zend.com/) – specifically the GData
-  extension.
+* A Google Spreadsheet.
+* A Google Developer Project.
+* [php-google-spreadsheet-client](https://github.com/asimlqt/php-google-spreadsheet-client)
+  and [google-api-php-client](https://github.com/google/google-api-php-client).
 
 ## Getting started
 
 * Download the project files.
-* Download [Zend Framework](http://framework.zend.com/download/current/). The
-  Minimal package is sufficient. Put the `Zend` directory directly under this
-  directory.
-* Create a GoogleDocs spreadsheet with the following columns, in this order
-  (important):
+* Install [Composer](https://getcomposer.org/).
+* Install the dependencies with `composer install`.
+* Create a GoogleDocs spreadsheet. Choose a good, unique name for the
+  spreadsheet, and don't change it! Then add the following columns:
   * Email
   * FirstName
   * LastName
   * Coming
   * Friend
   * Message
-* Set up a new Gmail/Google Apps account with the least permissions possible
-  while still being able to edit the spreadsheet.
+* Create a Google Developer Project in the
+  [Developers Console](https://console.developers.google.com/).
+  * In the Credentials section, create a Client ID with the Service Account
+    type. Choose the P12 key type.
+  * Download the P12 key file. Keep it secret. Keep it safe. In a location where
+    your PHP app can read it.
+* Copy the Email address of your Google Project's Client ID and share the
+  spreadsheet with this email address (give it read/write access).
 * Create a subdirectory called `custom`.
 * Make a copy of `default/config.php` in the `custom` directory. Fill in the
-  required options. Keep it secret. Keep it safe.
+  required options.
 
 ## Customization
 
