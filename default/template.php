@@ -50,7 +50,7 @@
             <input type="text" name="message" id="message" value="">
           </div>
         </div>
-        <input type="submit" name="submit" id="submit" value="<?php print $texts->submit; ?>" />
+        <div class="submit-wrapper"> <input type="submit" name="submit" id="submit" value="<?php print $texts->submit; ?>" /></div>
         <div id="step-6" class="step">
           <p class="message"><?php print $texts->step_6->message_default; ?></p>
           <p class="message"><?php print $texts->bye; ?></p>

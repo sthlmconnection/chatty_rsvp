@@ -8,7 +8,7 @@
     step = 0,
     $form,
     nameKnown = false;
-  
+
   // Collect all values of the form into a hash.
   var getFormValues = function($form) {
     $.each($form.serializeArray(), function(i, field) {
@@ -76,7 +76,8 @@
       // Empty initial state.
       case 0:
         showNext(function() {
-          $("#submit").val(texts.proceed).slideDown(100);
+          $("#submit").val(texts.proceed);
+          $(".submit-wrapper").slideDown(100);
         });
         break;
 
@@ -200,7 +201,7 @@
                 alert(texts.submit_error);
               }
               else {
-                $("#submit", $form).slideUp(200);
+                $(".submit-wrapper", $form).slideUp(200);
                 loading(false);
                 showNext();
               }
@@ -208,7 +209,7 @@
             error: function(xhr, ajaxOptions, thrownError) {
               loading(false);
               alert(texts.submit_error);
-            }    
+            }
           });
         }
         else {
